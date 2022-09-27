@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "access-logs"
+version = "0.1.0"
+description = "Extract data from HTTP access logs"
+authors = ["Hugh Wimberly <hugh.wimberly@gmail.com>"]
+license = "Apache License 2.0"
+readme = "README.md"
+packages = [{include = "access_logs"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.8.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
