@@ -9,7 +9,7 @@ ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 ENV PATH="$POETRY_HOME/bin:$PATH"
 RUN python -m venv "$POETRY_HOME" && "$POETRY_HOME/bin/pip" install poetry==1.2.0
 COPY . ./
-RUN poetry install --no-interaction --no-ansi -vvv
+RUN poetry install --only main --no-interaction --no-ansi -vvv
 
 
 FROM python as runtime
