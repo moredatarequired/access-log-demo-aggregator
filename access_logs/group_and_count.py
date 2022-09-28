@@ -66,12 +66,14 @@ async def aggregate_logfile(src: Path, dest_root: Path) -> None:
     for status, counts_by_minute in counts.items():
         dest = dest_root / f"{status}.csv"
         with dest.open("w") as f:
-            f.write("timestamp,count")
+            f.write("timestamp,count\n")
             for minute, count in counts_by_minute.items():
-                f.write(f"{minute},{count}")
+                f.write(f"{minute},{count}\n")
 
 
-async def aggregate_from_dir(src_root: Union[str, Path], dest_root: Union[str, Path]) -> None:
+async def aggregate_from_dir(
+    src_root: Union[str, Path], dest_root: Union[str, Path]
+) -> None:
     """Aggregate all access log files in `src_root` and write the summaries to CSV.
 
     For each file `src_root/**/<name>.log` a directory `dest_root/**/<name>` will be
@@ -87,7 +89,5 @@ async def aggregate_from_dir(src_root: Union[str, Path], dest_root: Union[str, P
     }
 
     await asyncio.gather(
-        *[
-            aggregate_logfile(src, dest) for src, dest in src_dests.items()
-        ]
+        *[aggregate_logfile(src, dest) for src, dest in src_dests.items()]
     )
